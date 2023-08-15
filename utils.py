@@ -24,3 +24,7 @@ def load_template(arquivo):
 
     with open(f"templates/{arquivo}") as f:
         return f.read()
+    
+def build_response(body='', code=200, reason='OK', headers=''):
+
+    return f"HTTP/1.1 {code} {reason}\n{headers}\n{body}".encode()
