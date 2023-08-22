@@ -22,6 +22,10 @@ class Database():
             content = linha[2]
             notes.append(Note(id=id, title=title, content=content))
         return notes
+    
+    def update(self, entry):
+        self.cursor.execute(f"UPDATE note SET title = '{entry.title}', content = '{entry.content}' WHERE id = {entry.id};")
+        self.conn.commit()
 
 @dataclass
 class Note:
