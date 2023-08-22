@@ -13,12 +13,15 @@ def read_file(path):
     with open(path, "rb") as f:
         return f.read()
     
-def load_data(nome):
+def load_data(database):
 
-    with open(f"./data/{nome}") as f:
-        data = json.load(f)
+    # with open(f"./data/{nome}") as f:
+    #     data = json.load(f)
 
-    return data
+    # return data
+
+    # adicionando suporte a database (handout 3):
+    return database.get_all()
 
 def load_template(arquivo):
 

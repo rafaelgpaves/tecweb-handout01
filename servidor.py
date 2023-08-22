@@ -2,6 +2,7 @@ import socket
 from pathlib import Path
 from utils import extract_route, read_file, build_response
 from views import index
+from database import Database
 
 CUR_DIR = Path(__file__).parent
 
@@ -15,6 +16,8 @@ server_socket.listen()
 
 print(f'Servidor escutando em (ctrl+click): http://{SERVER_HOST}:{SERVER_PORT}')
 
+db = Database("getit")
+
 while True:
     client_connection, client_address = server_socket.accept()
 
@@ -27,7 +30,7 @@ while True:
     if filepath.is_file():
         response = build_response() + read_file(filepath)
     elif route == '':
-        response = index(request)
+        response = index(request, database=db)
     else:
         response = build_response()
 

@@ -2,8 +2,9 @@ from utils import load_data, load_template
 from urllib.parse import unquote_plus
 import json
 from utils import build_response
+from database import Note
 
-def index(request):
+def index(request, database):
     # A string de request sempre começa com o tipo da requisição (ex: GET, POST)
     if request.startswith('POST'):
         request = request.replace('\r', '')  # Remove caracteres indesejados
@@ -21,25 +22,28 @@ def index(request):
             chave = chave_valor.split("=")[0]
             valor = unquote_plus(chave_valor.split("=")[1])
             params[chave] = valor
-        add_to_json(params)
+        add_to_json(database, params)
         return build_response(code=303, reason='See Other', headers='Location: /')
 
     # Cria uma lista de <li>'s para cada anotação
     # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=dados['titulo'], details=dados['detalhes'])
-        for dados in load_data('notes.json')
+        note_template.format(title=dados.title, details=dados.content)
+        for dados in load_data(database=database)
     ]
     notes = '\n'.join(notes_li)
 
     return build_response() + load_template('index.html').format(notes=notes).encode()
 
-def add_to_json(anotacao):
+def add_to_json(database, anotacao):
 
-    with open("./data/notes.json") as f:
-        data = json.load(f)
-        data.append(anotacao)
+    # with open("./data/notes.json") as f:
+    #     data = json.load(f)
+    #     data.append(anotacao)
 
-    with open("./data/notes.json", "w") as f:
-        json.dump(data, f)
+    # with open("./data/notes.json", "w") as f:
+    #     json.dump(data, f)
+
+    # adicionando suporte a database (handout 3):
+    database.add(Note(title=anotacao["titulo"], content=anotacao["detalhes"]))

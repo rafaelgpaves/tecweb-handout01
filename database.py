@@ -27,6 +27,9 @@ class Database():
         self.cursor.execute(f"UPDATE note SET title = '{entry.title}', content = '{entry.content}' WHERE id = {entry.id};")
         self.conn.commit()
 
+    def delete(self, note_id):
+        self.cursor.execute(f"DELETE FROM note WHERE id = {note_id};")
+
 @dataclass
 class Note:
     id: int = None
