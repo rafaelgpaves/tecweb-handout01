@@ -13,6 +13,16 @@ class Database():
         self.cursor.execute(f"INSERT INTO note (title,content) VALUES ('{note.title}','{note.content}');")
         self.conn.commit()
 
+    def get_all(self):
+        cursor = self.cursor.execute("SELECT id, title, content FROM note;")
+        notes = []
+        for linha in cursor:
+            id = linha[0]
+            title = linha[1]
+            content = linha[2]
+            notes.append(Note(id=id, title=title, content=content))
+        return notes
+
 @dataclass
 class Note:
     id: int = None
