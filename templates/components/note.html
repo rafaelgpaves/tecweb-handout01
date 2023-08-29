@@ -1,4 +1,18 @@
-<li>
-    <h3>{title}</h3>
-    <p>{details}</p>
-</li>
+<div class="card">
+    <div class="linha">
+        <h3 class="card-title">{title}</h3>
+        <form action="/delete/{id}" method="get">
+            <input type="image" src="../../img/trash.png" class="icon">
+            <!-- <div>
+                <button type="submit" formmethod="get">
+                    <img src="../../img/trash.png" alt="" class="icon">
+                </button>
+            </div> -->
+        </form>
+    </div>
+    <div class="card-content">
+        <p>
+            {details}
+        </p>
+    </div>
+</div>
