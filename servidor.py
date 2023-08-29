@@ -31,6 +31,9 @@ while True:
         response = build_response() + read_file(filepath)
     elif route == '':
         response = index(request, database=db)
+    elif "delete" in route:
+        # response = delete(db, route[route.find("/")+1:route.find("?")])
+        response = index(request, db, True, route[route.find("/")+1:route.find("?")])
     else:
         response = build_response()
 

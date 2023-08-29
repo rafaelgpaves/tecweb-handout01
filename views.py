@@ -4,8 +4,10 @@ import json
 from utils import build_response
 from database import Note
 
-def index(request, database):
+def index(request, database, delete=False, delete_id=None):
     # A string de request sempre começa com o tipo da requisição (ex: GET, POST)
+    if delete and str(delete_id).isnumeric():
+        database.delete(delete_id)
     if request.startswith('POST'):
         request = request.replace('\r', '')  # Remove caracteres indesejados
         # Cabeçalho e corpo estão sempre separados por duas quebras de linha
@@ -29,7 +31,7 @@ def index(request, database):
     # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=dados.title, details=dados.content)
+        note_template.format(id=dados.id, title=dados.title, details=dados.content)
         for dados in load_data(database=database)
     ]
     notes = '\n'.join(notes_li)
