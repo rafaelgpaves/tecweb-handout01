@@ -13,6 +13,9 @@ class Database():
         self.cursor.execute(f"INSERT INTO note (title,content) VALUES ('{note.title}','{note.content}');")
         self.conn.commit()
 
+    def get_id(self, id):
+        pass
+
     def get_all(self):
         cursor = self.cursor.execute("SELECT id, title, content FROM note;")
         notes = []
@@ -29,6 +32,7 @@ class Database():
 
     def delete(self, note_id):
         self.cursor.execute(f"DELETE FROM note WHERE id = {note_id};")
+        self.conn.commit()
 
 @dataclass
 class Note:
