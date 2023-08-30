@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit note</title>
+    <link rel="stylesheet" href="getit.css" />
+</head>
+<body>
+    
+    <div class="appbar">
+        <img src="img/logo-getit.png" class="logo" />
+        <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+    </div>
+
+    <main class="container">
+        <form class="form-card" method="post">
+            <input
+            class="form-card-title"
+            type="text"
+            name="title"
+            value="{title}"
+            placeholder={title}
+            />
+            <textarea
+            class="autoresize"
+            name="content"
+            placeholder={content}
+            ></textarea>
+            <form action="/" method="post">
+                <button class="btn" type="submit">Cancelar</button>
+            </form>
+            <form action="/update/cancel" method="post">
+                <button type="submit">Salvar</button>
+            </form>
+        </form>
+    </main>
+
+</body>
+</html>
