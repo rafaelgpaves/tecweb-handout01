@@ -78,6 +78,9 @@ def update(request, database, id, cancel=False):
 
     return build_response() + load_template("update.html").format(title=database.get_id(id).title, content=database.get_id(id).content).encode()
 
+def not_found():
+    return build_response() + load_template("notfound.html").encode()
+
 def add_to_json(database, anotacao):
 
     # with open("./data/notes.json") as f:

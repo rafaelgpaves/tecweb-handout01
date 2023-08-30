@@ -267,3 +267,19 @@ Algumas informações úteis e dicas:
   flex-direction: row;
   justify-content: space-between;
 }
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+}
+
+.not-found-title {
+  font-weight: 500;
+  color: #f7d736;
+  font-size: xx-large;
+  margin: 5% 0;
+}
