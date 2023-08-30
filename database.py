@@ -14,7 +14,9 @@ class Database():
         self.conn.commit()
 
     def get_id(self, id):
-        pass
+        cursor = ((self.cursor.execute(f"SELECT * FROM note WHERE id={id};")).fetchall())[0]
+        print(cursor)
+        return Note(id=id, title=cursor[1], content=cursor[2])
 
     def get_all(self):
         cursor = self.cursor.execute("SELECT id, title, content FROM note;")
