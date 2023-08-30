@@ -25,7 +25,10 @@ def index(request, database, delete=False, delete_id=None):
             chave = chave_valor.split("=")[0]
             valor = unquote_plus(chave_valor.split("=")[1])
             params[chave] = valor
-        add_to_json(database, params)
+        try:
+            database.add(Note(title=params["titulo"], content=params["detalhes"]))
+        except Exception:
+            return not_found()
         return build_response(code=303, reason='See Other', headers='Location: /')
 
     # Cria uma lista de <li>'s para cada anotação
@@ -66,7 +69,10 @@ def update(request, database, id, cancel=False):
                 chave = chave_valor.split("=")[0]
                 valor = unquote_plus(chave_valor.split("=")[1])
                 params[chave] = valor
-            database.update(Note(id=id, title=params["title"], content=params["content"]))
+            try:
+                database.update(Note(id=id, title=params["title"], content=params["content"]))
+            except Exception:
+                return not_found()
 
         note_template = load_template('components/note.html')
         notes_li = [
@@ -76,19 +82,10 @@ def update(request, database, id, cancel=False):
         notes = '\n'.join(notes_li)
         return build_response() + load_template('index.html').format(notes=notes).encode()
 
-    return build_response() + load_template("update.html").format(title=database.get_id(id).title, content=database.get_id(id).content).encode()
+    try:
+        return build_response() + load_template("update.html").format(title=database.get_id(id).title, content=database.get_id(id).content).encode()
+    except Exception:
+        return not_found()
 
 def not_found():
     return build_response() + load_template("notfound.html").encode()
-
-def add_to_json(database, anotacao):
-
-    # with open("./data/notes.json") as f:
-    #     data = json.load(f)
-    #     data.append(anotacao)
-
-    # with open("./data/notes.json", "w") as f:
-    #     json.dump(data, f)
-
-    # adicionando suporte a database (handout 3):
-    database.add(Note(title=anotacao["titulo"], content=anotacao["detalhes"]))

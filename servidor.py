@@ -31,10 +31,10 @@ while True:
         response = build_response() + read_file(filepath)
     elif route == '':
         response = index(request, database=db)
-    elif "delete" in route:
+    elif "delete" in route.split("/"):
         response = delete(request, db, route[route.find("/")+1:route.find("?")])
         # response = index(request, db, True, route[route.find("/")+1:route.find("?")])
-    elif "update" in route:
+    elif "update" in route.split("/"):
         # response = delete(db, route[route.find("/")+1:route.find("?")])
         response = update(request, db, route[route.find("/")+1:route.find("?")], cancel="cancel" in route)
     else:
