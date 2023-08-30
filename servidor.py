@@ -1,7 +1,7 @@
 import socket
 from pathlib import Path
 from utils import extract_route, read_file, build_response
-from views import index
+from views import index, delete, update
 from database import Database
 
 CUR_DIR = Path(__file__).parent
@@ -32,8 +32,11 @@ while True:
     elif route == '':
         response = index(request, database=db)
     elif "delete" in route:
+        response = delete(request, db, route[route.find("/")+1:route.find("?")])
+        # response = index(request, db, True, route[route.find("/")+1:route.find("?")])
+    elif "update" in route:
         # response = delete(db, route[route.find("/")+1:route.find("?")])
-        response = index(request, db, True, route[route.find("/")+1:route.find("?")])
+        response = update(request, db, route[route.find("/")+1:route.find("?")], cancel="cancel" in route)
     else:
         response = build_response()
 
