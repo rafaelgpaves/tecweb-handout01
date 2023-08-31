@@ -25,7 +25,7 @@ def load_data(database):
 
 def load_template(arquivo):
 
-    with open(f"templates/{arquivo}") as f:
+    with open(f"templates/{arquivo}", encoding="UTF-8") as f:
         return f.read()
     
 def build_response(body='', code=200, reason='OK', headers=''):
