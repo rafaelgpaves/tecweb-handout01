@@ -130,7 +130,7 @@ Algumas informações úteis e dicas:
  }
  
  .form-card-title {
-   width: 100%;
+   width: 40%;
    min-width: 50px;
    font-size: x-large;
    font-weight: 600;
@@ -268,23 +268,34 @@ Algumas informações úteis e dicas:
   justify-content: space-between;
 }
 
-.cancel {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+.coluna {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+}
+
+.not-found-title {
+  font-weight: 500;
+  color: #f7d736;
+  font-size: xx-large;
   margin: 5% 0;
+}
 
-  overflow: hidden;
+.rosa {
+  background-color: #ef89ba;
+}
 
-  border-width: 0;
-  outline: none;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+.azul {
+  background-color: #9de0f5;
+}
 
-  background-color: #ef4536;
+.amarelo {
+  background-color: #fae890;
+}
 
-  transition: background-color 0.3s;
-
-  width: 100%;
-  min-width: 50px;
+.verde {
+  background-color: #abe9c1;
 }

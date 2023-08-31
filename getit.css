@@ -283,3 +283,19 @@ Algumas informações úteis e dicas:
   font-size: xx-large;
   margin: 5% 0;
 }
+
+.rosa {
+  background-color: #ef89ba;
+}
+
+.azul {
+  background-color: #9de0f5;
+}
+
+.amarelo {
+  background-color: #fae890;
+}
+
+.verde {
+  background-color: #abe9c1;
+}

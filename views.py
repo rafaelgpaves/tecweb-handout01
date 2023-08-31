@@ -26,7 +26,7 @@ def index(request, database, delete=False, delete_id=None):
             valor = unquote_plus(chave_valor.split("=")[1])
             params[chave] = valor
         try:
-            database.add(Note(title=params["titulo"], content=params["detalhes"]))
+            database.add(Note(title=params["titulo"], content=params["detalhes"], color=params["color"]))
         except Exception:
             return not_found()
         return build_response(code=303, reason='See Other', headers='Location: /')
@@ -35,7 +35,7 @@ def index(request, database, delete=False, delete_id=None):
     # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(id=dados.id, title=dados.title, details=dados.content)
+        note_template.format(id=dados.id, title=dados.title, details=dados.content, color=dados.color)
         for dados in load_data(database=database)
     ]
     notes = '\n'.join(notes_li)
@@ -49,7 +49,7 @@ def delete(request, database, id):
     
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(id=dados.id, title=dados.title, details=dados.content)
+        note_template.format(id=dados.id, title=dados.title, details=dados.content, color=dados.color)
         for dados in load_data(database=database)
     ]
     notes = '\n'.join(notes_li)
@@ -70,13 +70,13 @@ def update(request, database, id, cancel=False):
                 valor = unquote_plus(chave_valor.split("=")[1])
                 params[chave] = valor
             try:
-                database.update(Note(id=id, title=params["title"], content=params["content"]))
+                database.update(Note(id=id, title=params["title"], content=params["content"], color=params["color"]))
             except Exception:
                 return not_found()
 
         note_template = load_template('components/note.html')
         notes_li = [
-            note_template.format(id=dados.id, title=dados.title, details=dados.content)
+            note_template.format(id=dados.id, title=dados.title, details=dados.content, color=dados.color)
             for dados in load_data(database=database)
         ]
         notes = '\n'.join(notes_li)
