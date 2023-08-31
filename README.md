@@ -2,7 +2,7 @@
 
 Da matéria de Tecnologias Web, 4° semestre de Engenharia da Computação do Insper
 
-Esse projeto é um servidor feito em python. É uma página para gerenciar notas como se fossem post-its. As funcionalidades disponíveis são:
+É uma página para gerenciar notas como se fossem post-its. As funcionalidades disponíveis são:
 1. Criar notas
 2. Conexão com uma database
 3. Apagar notas
