@@ -88,4 +88,4 @@ def update(request, database, id, cancel=False):
         return not_found()
 
 def not_found():
-    return build_response() + load_template("notfound.html").encode()
+    return build_response(code=404, reason="Not Found") + load_template("notfound.html").encode()
